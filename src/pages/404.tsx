@@ -1,17 +1,19 @@
 import { Button, Result } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 const NotFoundPage: React.FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('common');
 
   return (
     <Result
       status="404"
       title="404"
-      subTitle="Sorry, the page you visited does not exist."
+      subTitle={t('page_not_authorize')}
       extra={
         <Button type="primary" onClick={() => navigate('/')}>
-          Back Home
+          {t('back_home')}
         </Button>
       }
     />
