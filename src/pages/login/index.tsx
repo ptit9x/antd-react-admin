@@ -2,6 +2,7 @@ import type { FC } from 'react';
 
 import { Button, Checkbox, Flex, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { LoginParams } from '@/types';
 
 const initialValues: LoginParams = {
@@ -12,6 +13,7 @@ const initialValues: LoginParams = {
 
 const LoginForm: FC = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('auth');
   // const location = useLocation();
 
   const onFinished = async (form: LoginParams) => {
@@ -45,27 +47,22 @@ const LoginForm: FC = () => {
           rules={[
             {
               required: true,
-              message: "Please enter Username",
+              message: t('please_input_your_email'),
             },
           ]}
         >
-          <Input
-            placeholder="Username"
-          />
+          <Input placeholder={t('placeholder_username')} />
         </Form.Item>
         <Form.Item
           name="password"
           rules={[
             {
               required: true,
-              message: "Please enter Password"
+              message: t('please_input_your_password'),
             },
           ]}
         >
-          <Input
-            type="password"
-            placeholder="Password"
-          />
+          <Input type="password" placeholder={t('placeholder_password')} />
         </Form.Item>
         <Form.Item name="remember" valuePropName="checked">
           <Checkbox>
@@ -74,7 +71,7 @@ const LoginForm: FC = () => {
         </Form.Item>
         <Form.Item>
           <Button htmlType="submit" type="primary" style={{ width: "100%" }}>
-            Login
+            {t('login')}
           </Button>
         </Form.Item>
       </Form>
