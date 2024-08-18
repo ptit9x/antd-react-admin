@@ -3,5 +3,10 @@
   "page_not_found_title": "Sorry, the page you visited does not exist.",
   "page_not_authorize": "Sorry, you are not authorized to access this page.",
   "go_to_login": "Go to Login",
-  "no_data": "No data displayed"
+  "no_data": "No data displayed",
+  "switch_to_light_theme": "Switch to light theme",
+  "switch_to_dark_theme": "Switch to dark theme",
+  "account": "Account",
+  "login": "Login",
+  "logout": "Logout"
 }

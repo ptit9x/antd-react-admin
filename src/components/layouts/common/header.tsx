@@ -5,14 +5,14 @@ import { Dropdown, Layout, theme as antTheme, Tooltip, Button, Flex } from 'antd
 import { useNavigate } from 'react-router-dom';
 
 import Avator from '@/assets/header/avator.jpeg';
-import EnUsSvg from '@/assets/header/en_US.svg';
-import ZhCnSvg from '@/assets/header/zh_CN.svg';
 import ReactSvg from '@/assets/logo/react.svg';
 import { useAppContext } from '@/hooks/useAppContext';
 import { useMediaQuery } from '@uidotdev/usehooks';
-import { MoonIcon } from '../icons/MoonIcon';
-import { SunIcon } from '../icons/SunIcon';
-import { LanguageIcon } from '../icons/LanguageIcon';
+import { MoonIcon } from '../../icons/MoonIcon';
+import { SunIcon } from '../../icons/SunIcon';
+import LanguageDropdown from './LanguageDropdown';
+import { useTranslation } from 'react-i18next';
+import { PATH_LOGIN } from '@/routes/routes.path';
 
 const { Header } = Layout;
 
@@ -26,6 +26,7 @@ type Action = 'userInfo' | 'userSetting' | 'logout';
 const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
   const { theme, setTheme } = useAppContext();
   const navigate = useNavigate();
+  const { t } = useTranslation('common');
   const isMobile = useMediaQuery("only screen and (max-width : 768px)");
   const token = antTheme.useToken();
   const logged = true;
@@ -37,15 +38,13 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
       case 'userSetting':
         return;
       case 'logout':
-        // const res = Boolean(await dispatch(logoutAsync()));
-
-        navigate('/login');
+        navigate(PATH_LOGIN);
         return;
     }
   };
 
   const toLogin = () => {
-    navigate('/login');
+    navigate(PATH_LOGIN);
   };
 
   const onChangeTheme = () => {
@@ -54,10 +53,6 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
     localStorage.setItem('theme', newTheme);
     setTheme(newTheme);
   };
-
-  const selectLocale = ({ key }: { key: string }) => {
-    console.log(key, "huynhdn");
-  }
 
   return (
     <Header className="layout-page-header bg-2" style={{ 
@@ -79,9 +74,9 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
       }}>
         <Button 
           id="sidebar-trigger" type='text' icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} onClick={toggle} />
-        <Flex gap={20} align='center'>
+        <Flex gap={10} align='center'>
           <Tooltip
-            title={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+            title={theme === 'dark' ? t('switch_to_light_theme') : t('switch_to_dark_theme')}
           >
             <Button id="theme-change" type='text' icon={theme === 'dark' 
               ? <SunIcon /> 
@@ -89,29 +84,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
               onClick={onChangeTheme} />
           </Tooltip>
           {/* <HeaderNoticeComponent /> */}
-          <Dropdown
-            menu={{
-              onClick: info => selectLocale(info),
-              items: [
-                {
-                  key: 'zh_CN',
-                  icon: <img src={ZhCnSvg} alt="" width={20} />,
-                  // disabled: locale === 'zh_CN',
-                  label: 'China',
-                },
-                {
-                  key: 'en_US',
-                  icon: <img src={EnUsSvg} alt="" width={20} />,
-                  // disabled: locale === 'en_US',
-                  label: 'English',
-                },
-              ],
-            }}
-          >
-            <span id="language-change">
-              <LanguageIcon />
-            </span>
-          </Dropdown>
+          <LanguageDropdown />
 
           {logged ? (
             <Dropdown
@@ -122,7 +95,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                     icon: <UserOutlined />,
                     label: (
                       <span onClick={() => navigate('/dashboard')}>
-                        Account
+                        {t('account')}
                       </span>
                     ),
                   },
@@ -131,7 +104,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                     icon: <LogoutOutlined />,
                     label: (
                       <span onClick={() => onActionClick('logout')}>
-                        Logout
+                        {t('logout')}
                       </span>
                     ),
                   },
@@ -142,7 +115,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
             </Dropdown>
           ) : (
             <span style={{ cursor: 'pointer' }} onClick={toLogin}>
-              Login
+              {t('login')}
             </span>
           )}
         </Flex>

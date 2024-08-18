@@ -25,7 +25,7 @@ const MenuComponent: FC<MenuProps> = props => {
     return (
       <Flex align='center'>
         {menu.icon}
-        <span>{menu.label['en_US']}</span>
+        <span>{menu.label}</span>
       </Flex>
     );
   };
@@ -59,7 +59,7 @@ const MenuComponent: FC<MenuProps> = props => {
               label: getTitle(menu),
               children: menu.children.map(child => ({
                 key: child.path,
-                label: child.label['en_US'],
+                label: child.label,
               })),
             }
           : {

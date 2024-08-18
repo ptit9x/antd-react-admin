@@ -2,10 +2,10 @@ import { Drawer, Layout, theme as antTheme } from 'antd';
 import { Suspense, useState } from 'react';
 import { Outlet, useLocation } from 'react-router';
 
-import HeaderComponent from './header';
-import MenuComponent from './menu';
+import HeaderComponent from './common/header';
+import MenuComponent from './common/menu';
 import { useMediaQuery } from '@uidotdev/usehooks';
-import { mockMenuList } from './menu.mock';
+import { menuSideBar } from './common/menu.constant';
 import { useAppContext } from '@/hooks/useAppContext';
 
 const { Sider, Content } = Layout;
@@ -38,7 +38,7 @@ const MainLayout = () => {
             breakpoint="md"
           >
             <MenuComponent
-              menuList={mockMenuList}
+              menuList={menuSideBar}
               openKey={openKey}
               onChangeOpenKey={k => setOpenkey(k)}
               selectedKey={selectedKey}
@@ -54,7 +54,7 @@ const MainLayout = () => {
             open={!collapsed}
           >
             <MenuComponent
-              menuList={mockMenuList}
+              menuList={menuSideBar}
               openKey={openKey}
               onChangeOpenKey={k => setOpenkey(k)}
               selectedKey={selectedKey}
@@ -65,7 +65,7 @@ const MainLayout = () => {
         <Content style={{
             padding: 16,
             margin: 0,
-            minHeight: 500,
+            height: 'calc(100vh - 64px)',
           }}>
           <Suspense fallback={null}>
             <Outlet />
