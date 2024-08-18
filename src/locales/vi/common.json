@@ -1,7 +1,12 @@
 {
-  "back_home": "Back Home",
-  "page_not_found_title": "Sorry, the page you visited does not exist.",
-  "page_not_authorize": "Sorry, you are not authorized to access this page.",
-  "go_to_login": "Go to Login",
-  "no_data": "No data displayed"
-}
+  "back_home": "Quay lại trang chủ",
+  "page_not_found_title": "Rất tiếc, trang bạn đã truy cập không tồn tại.",
+  "page_not_authorize": "Rất tiếc, bạn không được phép truy cập trang này.",
+  "go_to_login": "Đi đến Đăng nhập",
+  "no_data": "Không có dữ liệu nào được hiển thị",
+  "switch_to_light_theme": "Chuyển sang chủ đề sáng",
+  "switch_to_dark_theme": "Chuyển sang chủ đề tối",
+  "account": "Tài khoản",
+  "login": "Đăng nhập",
+  "logout": "Đăng xuất"
+  }
