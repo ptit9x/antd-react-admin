@@ -41,3 +41,7 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+.user-profile-tabs .ant-tabs-nav,
+.user-profile-card-nav .ant-card-actions li:first-of-type {
+    margin: 0;
+}

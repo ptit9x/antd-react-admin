@@ -1,6 +1,7 @@
 import { Flex, Form, Input, Button, Grid } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { ResetPasswordParams } from '@/types';
 
 const { useBreakpoint } = Grid;
 
@@ -11,7 +12,7 @@ export default function ForgotPasswordModule() {
   return (
     <Flex
       justify='center'
-      align= {screens.lg ? 'start' : 'center'}
+      align={screens.lg ? 'start' : 'center'}
       vertical
       style={{
         height: '100%',
@@ -23,18 +24,18 @@ export default function ForgotPasswordModule() {
           fontWeight: '500',
           fontSize: '38px',
         }}>
-        {t('Forgot password')}
+        {t('forgot_password')}
       </h1>
-      <p>{t('Enter your email to reset your password.')}</p>
-      <Form style={{ width: '100%' }}>
+      <p>{t('enter_your_email_to_reset_your_password')}</p>
+      <Form<ResetPasswordParams> style={{ width: '100%' }}>
         <Form.Item
           name='email'
-          label={t('Email')}
+          label={t('email')}
           labelCol={{ span: 24 }}
           rules={[
             {
               required: true,
-              message: t('Please input your email'),
+              message: t('please_input_your_email'),
             },
             {
               type: 'email',
@@ -45,7 +46,7 @@ export default function ForgotPasswordModule() {
         </Form.Item>
         <Form.Item>
           <Button htmlType='submit' type='primary'>
-            {t('Continue')}
+            {t('continue')}
           </Button>
           <Button
             type='text'

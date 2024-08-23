@@ -20,5 +20,11 @@
   "view": "view",
   "account": "Account",
   "login": "Login",
-  "logout": "Logout"
+  "logout": "Logout",
+  "home": "Home",
+  "dashboard": "Dashboard",
+  "course_in_progess": "Course in progess",
+  "courses_completed": "Courses completed",
+  "certificates_earned": "Certificates earned",
+  "community_support": "Community support"
 }

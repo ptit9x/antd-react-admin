@@ -20,5 +20,11 @@
   "view": "Xem",
   "account": "Tài khoản",
   "login": "Đăng nhập",
-  "logout": "Đăng xuất"
-}
+  "logout": "Đăng xuất",
+  "home": "Trang chủ",
+  "dashboard": "Bảng báo cáo",
+  "course_in_progess": "Khóa học đang tiến hành",
+  "courses_completed": "Khoá học đã hoàn thành",
+  "certificates_earned": "Chứng chỉ đã đạt được",
+  "community_support": "Hỗ trợ cộng đồng"
+  }
