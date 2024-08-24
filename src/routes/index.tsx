@@ -5,11 +5,15 @@ import { lazy } from 'react';
 import { Navigate, RouterProvider } from 'react-router';
 import { createBrowserRouter } from 'react-router-dom';
 
-import LoginPage from '@/pages/login';
+// import LoginPage from '@/pages/login';
 
 import WrapperRouteComponent from './config';
 import MainLayout from '@/components/layouts/main';
+import AuthenticationLayout from '@/components/layouts/authentication';
 import DashBoardPage from '@/pages/dashboard';
+import LoginPage from '@/pages/authentication/login';
+import RegisterPage from '@/pages/authentication/register';
+import ForgotPasswordPage from '@/pages/authentication/forgotPassword';
 
 const NotFound = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/404'));
 const Documentation = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/documentation'));
@@ -19,8 +23,22 @@ const TabPage = lazy(() => import(/* webpackChunkName: "route-permission"*/ '@/p
 
 const routeList: RouteObject[] = [
   {
-    path: '/login',
-    element: <WrapperRouteComponent element={<LoginPage />} />,
+    path: '/auth',
+    element: <WrapperRouteComponent element={<AuthenticationLayout />} />,
+    children: [
+      {
+        path: 'login',
+        element: <WrapperRouteComponent element={<LoginPage />} />,
+      },
+      {
+        path: 'register',
+        element: <WrapperRouteComponent element={<RegisterPage />} />,
+      },
+      {
+        path: 'password-reset',
+        element: <WrapperRouteComponent element={<ForgotPasswordPage />} />,
+      },
+    ]
   },
   {
     path: '/',
