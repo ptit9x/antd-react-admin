@@ -9,7 +9,7 @@ import commonVi from '@/locales/vi/common.json';
 import authEn from '@/locales/en/auth.json';
 import authVi from '@/locales/vi/auth.json';
 
-import { LocalStorageKey } from './constants/localstorage.constants';
+import { LocalStorageKey } from './constants/local-storage.constants';
 
 const currentLanguage = localStorage.getItem(LocalStorageKey.i18nextLng);
 const language = currentLanguage || 'en';
