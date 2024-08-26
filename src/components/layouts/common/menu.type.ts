@@ -7,6 +7,7 @@ type MenuItem = {
   icon?: ReactNode;
   path: string;
   children?: MenuItem[];
+  scope?: string;
 }
 
 export type MenuChild = Omit<MenuItem, 'children'>;

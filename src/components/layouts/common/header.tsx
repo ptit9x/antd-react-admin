@@ -13,6 +13,7 @@ import { SunIcon } from '../../icons/SunIcon';
 import LanguageDropdown from './LanguageDropdown';
 import { useTranslation } from 'react-i18next';
 import { PATH_LOGIN } from '@/routes/routes.path';
+import { LocalStorageKey } from '@/constants/local-storage.constants';
 
 const { Header } = Layout;
 
@@ -38,8 +39,13 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
       case 'userSetting':
         return;
       case 'logout':
-        navigate(PATH_LOGIN);
-        return;
+        {
+          const locales = localStorage.getItem(LocalStorageKey.i18nextLng);
+          localStorage.clear();
+          if (locales) localStorage.setItem(LocalStorageKey.i18nextLng, locales);
+          navigate(PATH_LOGIN);
+          return;
+       }
     }
   };
 

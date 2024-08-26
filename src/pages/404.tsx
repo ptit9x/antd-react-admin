@@ -10,7 +10,7 @@ const NotFoundPage: React.FC = () => {
     <Result
       status="404"
       title="404"
-      subTitle={t('page_not_authorize')}
+      subTitle={t('page_not_found_title')}
       extra={
         <Button type="primary" onClick={() => navigate('/')}>
           {t('back_home')}

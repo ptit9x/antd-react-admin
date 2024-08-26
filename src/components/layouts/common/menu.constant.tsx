@@ -1,24 +1,33 @@
-import { DashboardOutlined, FileTextOutlined, LockOutlined, RocketOutlined } from "@ant-design/icons";
+import { DashboardOutlined, FileTextOutlined, LockOutlined, RocketOutlined, UserOutlined } from "@ant-design/icons";
 import { MenuList } from "./menu.type";
+import { PATH_DOCUMENTATION, PATH_GUIDE, PATH_HOME, PATH_PERMISSION_ROUTE, PATH_USER_MANAGEMENT } from "@/routes/routes.path";
+import i18n from "@/i18n";
 
 export const menuSideBar: MenuList = [
     {
       code: 'dashboard',
-      label: "Dashboard",
+      label: i18n.t('common:menu_dashboard'),
       icon: <DashboardOutlined />,
-      path: '/dashboard',
+      path: PATH_HOME,
+    },
+    {
+      code: 'user_management',
+      label: i18n.t('common:menu_user_management'),
+      icon: <UserOutlined />,
+      path: PATH_USER_MANAGEMENT,
+      scope: 'user:read'
     },
     {
       code: 'documentation',
-      label: 'Documentation',
+      label: i18n.t('common:menu_documentation'),
       icon: <FileTextOutlined />,
-      path: '/documentation',
+      path: PATH_DOCUMENTATION,
     },
     {
       code: 'guide',
-      label: 'Guide',
+      label: i18n.t('common:menu_guide'),
       icon: <RocketOutlined />,
-      path: '/guide',
+      path: PATH_GUIDE,
     },
     {
       code: 'permission',
@@ -29,7 +38,8 @@ export const menuSideBar: MenuList = [
         {
           code: 'routePermission',
           label: 'Route Permission',
-          path: '/permission/route',
+          path: PATH_PERMISSION_ROUTE,
+          scope: 'permission:read'
         },
         {
           code: 'notFound',

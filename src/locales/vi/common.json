@@ -7,7 +7,18 @@
   "no_data": "Không có dữ liệu nào được hiển thị",
   "switch_to_light_theme": "Chuyển sang chủ đề sáng",
   "switch_to_dark_theme": "Chuyển sang chủ đề tối",
+  "menu_dashboard": "Bảng điều khiển",
+  "menu_user_management": "Người dùng",
+  "menu_documentation": "Tài liệu",
+  "menu_guide": "Hướng dẫn",
+  "search": "Tìm kiếm",
+  "reset": "Đặt lại",
+  "close": "Đóng",
+  "status": "Trạng thái",
+  "action": "Hành động",
+  "total_n_items": "Tổng cộng {{n}} bản ghi",
+  "view": "Xem",
   "account": "Tài khoản",
   "login": "Đăng nhập",
   "logout": "Đăng xuất"
-  }
+}

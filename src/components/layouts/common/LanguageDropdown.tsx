@@ -21,6 +21,7 @@ const LanguageDropdown = () => {
   const selectLocale = ({ key }: { key: string }) => {
     i18n.changeLanguage(key);
     setLocale(key);
+    window.location.reload();
   }
 
   return (

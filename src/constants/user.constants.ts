@@ -10,5 +10,10 @@ export enum RoleStatus {
 
 export enum UserStatus {
   ACTIVE = 1,
-  INACTIVE = 0,
+  INACTIVE = 2,
+}
+
+export const UserLabel = {
+  [UserStatus.ACTIVE]: "Active",
+  [UserStatus.INACTIVE]: "InActive"
 }

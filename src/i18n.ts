@@ -2,12 +2,12 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 
-
 import commonEn from '@/locales/en/common.json';
 import commonVi from '@/locales/vi/common.json';
-
 import authEn from '@/locales/en/auth.json';
 import authVi from '@/locales/vi/auth.json';
+import userEn from '@/locales/en/user.json';
+import userVi from '@/locales/vi/user.json';
 
 import { LocalStorageKey } from './constants/local-storage.constants';
 
@@ -18,10 +18,12 @@ const resources = {
   en: {
     common: commonEn,
     auth: authEn,
+    user: userEn,
   },
   vi: {
     common: commonVi,
     auth: authVi,
+    user: userVi,
   },
 } as const;
 
