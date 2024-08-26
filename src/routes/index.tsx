@@ -14,6 +14,7 @@ import DashBoardPage from '@/pages/dashboard';
 import LoginPage from '@/pages/authentication/login';
 import RegisterPage from '@/pages/authentication/register';
 import ForgotPasswordPage from '@/pages/authentication/forgotPassword';
+import UserManagementPage from '@/pages/user-management';
 
 const NotFound = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/404'));
 const Documentation = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/documentation'));
@@ -51,6 +52,10 @@ const routeList: RouteObject[] = [
       {
         path: 'dashboard',
         element: <WrapperRouteComponent element={<DashBoardPage />} />,
+      },
+      {
+        path: 'user-management',
+        element: <WrapperRouteComponent element={<UserManagementPage />} auth />,
       },
       {
         path: 'documentation',

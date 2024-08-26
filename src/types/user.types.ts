@@ -1,4 +1,5 @@
 import { RoleStatus, RoleTypes, UserStatus } from "@/constants/user.constants";
+import { IBaseParams, PageInfoResponseType } from ".";
 
 export type UserType = {
   id: string;
@@ -34,4 +35,12 @@ export type RoleType = {
 
 export type UserDetailType = UserType & {
   role: RoleType;
+};
+
+export type UserFilter = {
+  status?: UserStatus;
+} & IBaseParams;
+
+export type UserListResponseType = PageInfoResponseType & {
+  data: UserDetailType[];
 };

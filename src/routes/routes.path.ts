@@ -8,3 +8,9 @@ export const PATH_GUIDE = '/guide';
 export const PATH_COMPONENT_FORM = '/component/form';
 export const PATH_COMPONENT_TABLE = '/component/table';
 export const PATH_COMPONENT_TABS = '/component/tabs';
+
+export const PATH_USER_MANAGEMENT = '/user-management';
+export const PATH_USER_DETAIL = '/user-management/:id';
+
+export const PATH_PERMISSION = '/permission';
+export const PATH_PERMISSION_ROUTE = '/permission/route';

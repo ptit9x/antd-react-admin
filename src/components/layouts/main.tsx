@@ -7,6 +7,8 @@ import MenuComponent from './common/menu';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import { menuSideBar } from './common/menu.constant';
 import { useAppContext } from '@/hooks/useAppContext';
+// import { LocalStorageKey } from '@/constants/local-storage.constants';
+// import { PATH_LOGIN } from '@/routes/routes.path';
 
 const { Sider, Content } = Layout;
 
@@ -15,6 +17,7 @@ const MainLayout = () => {
   const [openKey, setOpenkey] = useState<string>();
   const [selectedKey, setSelectedKey] = useState<string>(location.pathname);
   const { collapsed, setCollapsed } = useAppContext();
+  // const [accessToken] = useLocalStorage(LocalStorageKey.access_token, '');
   const token = antTheme.useToken();
 
   const isMobile = useMediaQuery("only screen and (max-width : 768px)");
@@ -22,6 +25,10 @@ const MainLayout = () => {
   const toggle = () => {
     setCollapsed(!collapsed);
   };
+  // TODO: uncomment when join real project
+  // if (!accessToken) {
+  //   return <Navigate to={PATH_LOGIN} />;
+  // }
 
   return (
     <Layout>
@@ -66,6 +73,7 @@ const MainLayout = () => {
             padding: 16,
             margin: 0,
             height: 'calc(100vh - 64px)',
+            overflowY: 'scroll',
           }}>
           <Suspense fallback={null}>
             <Outlet />
