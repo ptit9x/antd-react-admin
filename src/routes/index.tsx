@@ -15,6 +15,11 @@ import LoginPage from '@/pages/authentication/login';
 import RegisterPage from '@/pages/authentication/register';
 import ForgotPasswordPage from '@/pages/authentication/forgotPassword';
 import UserManagementPage from '@/pages/user-management';
+import ProfileLayout from '@/components/layouts/profile';
+import DetailPage from '@/pages/profile/DetailPage';
+import PreferencesPage from '@/pages/profile/PreferencesPage';
+import SecurityPage from '@/pages/profile/SecurityPage';
+import ActivityPage from '@/pages/profile/ActivityPage';
 
 const NotFound = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/404'));
 const Documentation = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/documentation'));
@@ -41,6 +46,7 @@ const routeList: RouteObject[] = [
       },
     ]
   },
+  
   {
     path: '/',
     element: <WrapperRouteComponent element={<MainLayout />} />,
@@ -80,6 +86,28 @@ const routeList: RouteObject[] = [
       {
         path: '*',
         element: <WrapperRouteComponent element={<NotFound />} />,
+      },
+      {
+        path: '/user-profile',
+        element: <WrapperRouteComponent element={<ProfileLayout />} />,
+        children: [
+          {
+            path: 'details',
+            element: <WrapperRouteComponent element={<DetailPage />} />,
+          },
+          {
+            path: 'preferences',
+            element: <WrapperRouteComponent element={<PreferencesPage />} />,
+          },
+          {
+            path: 'security',
+            element: <WrapperRouteComponent element={<SecurityPage />} />,
+          },
+          {
+            path: 'activity',
+            element: <WrapperRouteComponent element={<ActivityPage />} />,
+          },
+        ]
       },
     ],
   },

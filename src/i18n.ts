@@ -9,6 +9,9 @@ import authVi from '@/locales/vi/auth.json';
 import userEn from '@/locales/en/user.json';
 import userVi from '@/locales/vi/user.json';
 
+import profileVi from '@/locales/vi/profile.json';
+import profileEn from '@/locales/en/profile.json';
+
 import { LocalStorageKey } from './constants/local-storage.constants';
 
 const currentLanguage = localStorage.getItem(LocalStorageKey.i18nextLng);
@@ -19,13 +22,14 @@ const resources = {
     common: commonEn,
     auth: authEn,
     user: userEn,
+    profile: profileEn,
   },
   vi: {
     common: commonVi,
     auth: authVi,
     user: userVi,
-  },
-} as const;
+    profile: profileVi,
+}} as const;
 
 i18n.use(initReactI18next).use(LanguageDetector).init({
   lng: language,

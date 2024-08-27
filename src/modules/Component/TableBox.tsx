@@ -1,11 +1,13 @@
 import React from 'react';
-import { Flex, Pagination, Table } from 'antd';
+import { Flex, Pagination, Table, Tag, Badge } from 'antd';
 import type { TableColumnsType, TableProps } from 'antd';
 
 interface DataType {
   key: React.Key;
   name: string;
   age: number;
+  piority: string[];
+  status: string[];
   address: string;
 }
 
@@ -51,6 +53,52 @@ const columns: TableColumnsType<DataType> = [
     sorter: (a, b) => a.age - b.age,
   },
   {
+    title: 'Piority',
+    dataIndex: 'piority',
+    render: (_, { piority }) => (
+      <>
+        {piority.map((piority) => {
+          let color = piority.length > 5 ? 'geekblue' : 'cyan';
+          if (piority === 'hight') {
+            color = 'red';
+          }
+          return (
+            <Tag color={color} key={piority}>
+              {piority.toUpperCase()}
+            </Tag>
+          );
+        })}
+      </>
+    ),
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    render: (_, { status }) => (
+      <>
+        {status.map((status) => {
+          let color:
+            | 'success'
+            | 'processing'
+            | 'error'
+            | 'default'
+            | 'warning'
+            | undefined = status.length > 9 ? 'processing' : 'success';
+          if (status === 'On hold') {
+            color = 'default';
+          }
+          let text = status;
+
+          if (status === 'hight') {
+            color = 'error';
+            text = 'High';
+          }
+          return <Badge status={color} text={text} key={status}></Badge>;
+        })}
+      </>
+    ),
+  },
+  {
     title: 'Address',
     dataIndex: 'address',
     filters: [
@@ -72,29 +120,42 @@ const data = [
     key: '1',
     name: 'John Brown',
     age: 32,
+    piority: ['medium'],
+    status: ['Completed'],
     address: 'New York No. 1 Lake Park',
   },
   {
     key: '2',
     name: 'Jim Green',
     age: 42,
+    piority: ['hight'],
+    status: ['On hold'],
     address: 'London No. 1 Lake Park',
   },
   {
     key: '3',
     name: 'Joe Black',
     age: 32,
+    piority: ['low'],
+    status: ['In progress'],
     address: 'Sydney No. 1 Lake Park',
   },
   {
     key: '4',
     name: 'Jim Red',
     age: 32,
+    piority: ['medium'],
+    status: ['In progress'],
     address: 'London No. 2 Lake Park',
   },
 ];
 
-const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
+const onChange: TableProps<DataType>['onChange'] = (
+  pagination,
+  filters,
+  sorter,
+  extra
+) => {
   console.log('params', pagination, filters, sorter, extra);
 };
 
@@ -119,7 +180,6 @@ const TableBox: React.FC = () => (
       />
     </Flex>
   </>
- 
 );
 
 export default TableBox;

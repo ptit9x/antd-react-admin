@@ -1,4 +1,4 @@
-import LeftPage from '@/modules/Authentication/LeftPage';
+import WelcomePage from '@/modules/Authentication/WelcomePage';
 import { Layout, Row, Col } from 'antd';
 import { Content } from 'antd/es/layout/layout';
 import { Suspense } from 'react';
@@ -9,7 +9,7 @@ const AuthenticationLayout = () => {
     <Layout>
       <Row style={{ minHeight: '100vh' }}>
         <Col sm={24} lg={12}>
-          <LeftPage />
+          <WelcomePage />
         </Col>
         <Col sm={24} lg={12}>
           <Content style={{ height: '100%' }}>

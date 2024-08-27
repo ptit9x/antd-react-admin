@@ -2,17 +2,19 @@ import { Flex, Col, Typography, theme as antTheme } from 'antd';
 import { useLocation } from 'react-router-dom';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
+import { PATH_REGISTER } from '@/routes/routes.path';
+
 
 const { Title, Paragraph } = Typography;
 
 export default function LeftPage() {
   const location = useLocation();
   const token = antTheme.useToken();
-  const {t} = useTranslation('auth');
+  const { t } = useTranslation('auth');
   const titleName = useMemo(() => {
-    return location.pathname === '/auth/register' 
-      ? t('Welcome to Antd Admin')
-      : t('Welcome back to Antd Admin');
+    return location.pathname === PATH_REGISTER
+      ? t('authen_welcome_title_register')
+      : t('authen_welcome_title');
   }, [location.pathname]);
 
   return (
@@ -39,7 +41,7 @@ export default function LeftPage() {
           {titleName}
         </Title>
         <Paragraph style={{ color: 'white' }}>
-          {t('A dynamic and versatile multipurpose dashboard utilizing Ant Design, React, TypeScript, and Vite.')}
+          {t('authen_welcome_description')}
         </Paragraph>
       </Col>
     </Flex>

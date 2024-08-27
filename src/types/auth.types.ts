@@ -38,6 +38,25 @@ export interface IToken {
   role: RoleType;
 }
 
+
+export type RegisterParams = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export type ResetPasswordParams = {
+  email: string;
+}
+
+export type ChangePasswordParams = {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
 export interface IChangePasswordRequest {
   oldPassword: string;
   newPassword: string;

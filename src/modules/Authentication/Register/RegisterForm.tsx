@@ -30,12 +30,12 @@ export default function RegisterForm() {
         <Col xs={24} lg={12}>
           <Form.Item
             name='firstName'
-            label={t('First Name')}
+            label={t('first_name')}
             labelCol={{ span: 24 }}
             rules={[
               {
                 required: true,
-                message: t('Please input your first name'),
+                message: t('please_input_your_first_name'),
               },
             ]}>
             <Input />
@@ -44,12 +44,12 @@ export default function RegisterForm() {
         <Col xs={24} lg={12}>
           <Form.Item
             name='lastName'
-            label={t('Last Name')}
+            label={t('last_name')}
             labelCol={{ span: 24 }}
             rules={[
               {
                 required: true,
-                message: t('Please input your last name'),
+                message: t('please_input_your_last_name'),
               },
             ]}>
             <Input />
@@ -57,13 +57,13 @@ export default function RegisterForm() {
         </Col>
       </Row>
       <Form.Item
-        name='username'
-        label={t('Email')}
+        name='email'
+        label={t('email')}
         labelCol={{ span: 24 }}
         rules={[
           {
             required: true,
-            message: t('Please input your email'),
+            message: t('please_input_your_email'),
           },
           {
             type: 'email',
@@ -74,24 +74,24 @@ export default function RegisterForm() {
       </Form.Item>
       <Form.Item
         name='password'
-        label={t('Password')}
+        label={t('password')}
         labelCol={{ span: 24 }}
         rules={[
           {
             required: true,
-            message: t('Please input your password'),
+            message: t('please_input_your_password'),
           },
         ]}>
         <Input.Password />
       </Form.Item>
       <Form.Item
         name='confirmPassword'
-        label={t('Confirm Password')}
+        label={t('confirm_password')}
         labelCol={{ span: 24 }}
         rules={[
           {
             required: true,
-            message: t('Please input your confirm password'),
+            message: t('please_input_your_confirm_password'),
           },
           ({ getFieldValue }) => ({
             validator(_, value) {
@@ -99,7 +99,7 @@ export default function RegisterForm() {
                 return Promise.resolve();
               }
               return Promise.reject(
-                new Error(t('The two passwords that you entered do not match!'))
+                new Error(t('the_two_passwords_that_you_entered_do_not_match!'))
               );
             },
           }),
@@ -107,12 +107,12 @@ export default function RegisterForm() {
         <Input.Password />
       </Form.Item>
       <Form.Item name='remember' valuePropName='checked'>
-        <Checkbox>{t('I agree')}</Checkbox>
-        <a>{t('terms and conditions')}</a>
+        <Checkbox>{t('i_agree')}</Checkbox>
+        <a>{t('terms_and_conditions')}</a>
       </Form.Item>
       <Form.Item>
         <Button htmlType='submit' type='primary'>
-          {t('Continue')}
+          {t('continue')}
         </Button>
       </Form.Item>
     </Form>

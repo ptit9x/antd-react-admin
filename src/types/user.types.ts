@@ -44,3 +44,14 @@ export type UserFilter = {
 export type UserListResponseType = PageInfoResponseType & {
   data: UserDetailType[];
 };
+export type UserParams = {
+    userId: string;
+    firstName: string;
+    middleName: string;
+    lastName: string;
+    email: string;
+    userName: string;
+    company: string;
+    subscription: string;
+    status: boolean;
+  }
