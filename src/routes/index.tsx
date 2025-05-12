@@ -20,12 +20,23 @@ import DetailPage from '@/pages/profile/DetailPage';
 import PreferencesPage from '@/pages/profile/PreferencesPage';
 import SecurityPage from '@/pages/profile/SecurityPage';
 import ActivityPage from '@/pages/profile/ActivityPage';
+import {
+  PATH_GUIDE,
+  PATH_HOME,
+  PATH_PROFILE,
+  PATH_USER_MANAGEMENT,
+  PATH_USER_DETAIL,
+  PATH_LIBRARY_CATEGORY_LISTING,
+  PATH_LIBRARY_BLOG_LISTING
+} from './routes.path';
 
 const NotFound = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/404'));
-const Documentation = lazy(() => import(/* webpackChunkName: "404'"*/ '@/pages/documentation'));
+const UserDetailPage = lazy(() => import('@/pages/user-management/detail'));
 const Guide = lazy(() => import(/* webpackChunkName: "guide'"*/ '@/pages/guide'));
 const TablePage = lazy(() => import(/* webpackChunkName: "route-permission"*/ '@/pages/components/table'));
 const TabPage = lazy(() => import(/* webpackChunkName: "route-permission"*/ '@/pages/components/tabs'));
+const CategoryListingPage = lazy(() => import('@/pages/categories'));
+const BlogListingPage = lazy(() => import('@/pages/blogs'));
 
 const routeList: RouteObject[] = [
   {
@@ -34,83 +45,91 @@ const routeList: RouteObject[] = [
     children: [
       {
         path: 'login',
-        element: <WrapperRouteComponent element={<LoginPage />} />,
+        element: <WrapperRouteComponent element={<LoginPage />} />
       },
       {
         path: 'register',
-        element: <WrapperRouteComponent element={<RegisterPage />} />,
+        element: <WrapperRouteComponent element={<RegisterPage />} />
       },
       {
         path: 'password-reset',
-        element: <WrapperRouteComponent element={<ForgotPasswordPage />} />,
-      },
+        element: <WrapperRouteComponent element={<ForgotPasswordPage />} />
+      }
     ]
   },
-  
+
   {
     path: '/',
     element: <WrapperRouteComponent element={<MainLayout />} />,
     children: [
       {
         path: '',
-        element: <Navigate to="dashboard" />,
+        element: <Navigate to='dashboard' />
       },
       {
-        path: 'dashboard',
-        element: <WrapperRouteComponent element={<DashBoardPage />} />,
+        path: PATH_HOME,
+        element: <WrapperRouteComponent element={<DashBoardPage />} />
       },
       {
-        path: 'user-management',
-        element: <WrapperRouteComponent element={<UserManagementPage />} auth />,
+        path: PATH_USER_MANAGEMENT,
+        element: <WrapperRouteComponent element={<UserManagementPage />} auth />
       },
       {
-        path: 'documentation',
-        element: <WrapperRouteComponent element={<Documentation />} />,
+        path: PATH_USER_DETAIL,
+        element: <WrapperRouteComponent element={<UserDetailPage />} auth />
       },
       {
-        path: 'guide',
-        element: <WrapperRouteComponent element={<Guide />} />,
+        path: PATH_LIBRARY_CATEGORY_LISTING,
+        element: <WrapperRouteComponent element={<CategoryListingPage />} auth />
+      },
+      {
+        path: PATH_LIBRARY_BLOG_LISTING,
+        element: <WrapperRouteComponent element={<BlogListingPage />} auth />
+      },
+      {
+        path: PATH_GUIDE,
+        element: <WrapperRouteComponent element={<Guide />} />
       },
       {
         path: 'permission/route',
-        element: <WrapperRouteComponent element={<TabPage />} auth />,
+        element: <WrapperRouteComponent element={<TabPage />} auth />
       },
       {
         path: 'component/tabs',
-        element: <WrapperRouteComponent element={<TabPage />} />,
+        element: <WrapperRouteComponent element={<TabPage />} />
       },
       {
         path: 'component/table',
-        element: <WrapperRouteComponent element={<TablePage />} />,
+        element: <WrapperRouteComponent element={<TablePage />} />
       },
       {
         path: '*',
-        element: <WrapperRouteComponent element={<NotFound />} />,
+        element: <WrapperRouteComponent element={<NotFound />} />
       },
       {
-        path: '/user-profile',
+        path: PATH_PROFILE,
         element: <WrapperRouteComponent element={<ProfileLayout />} />,
         children: [
           {
             path: 'details',
-            element: <WrapperRouteComponent element={<DetailPage />} />,
+            element: <WrapperRouteComponent element={<DetailPage />} />
           },
           {
             path: 'preferences',
-            element: <WrapperRouteComponent element={<PreferencesPage />} />,
+            element: <WrapperRouteComponent element={<PreferencesPage />} />
           },
           {
             path: 'security',
-            element: <WrapperRouteComponent element={<SecurityPage />} />,
+            element: <WrapperRouteComponent element={<SecurityPage />} />
           },
           {
             path: 'activity',
-            element: <WrapperRouteComponent element={<ActivityPage />} />,
-          },
+            element: <WrapperRouteComponent element={<ActivityPage />} />
+          }
         ]
-      },
-    ],
-  },
+      }
+    ]
+  }
 ];
 
 const RenderRouter: FC = () => {

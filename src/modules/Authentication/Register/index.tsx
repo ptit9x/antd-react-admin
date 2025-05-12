@@ -17,8 +17,9 @@ export default function RegisterModule() {
       style={{
         height: '100%',
         lineHeight: '50px',
-        padding: '2rem',
-      }}>
+        padding: '2rem'
+      }}
+    >
       <Title style={{ margin: 0 }}>{t('create_an_account')}</Title>
       <Flex gap={8}>
         <p>{t('already_have_an_account')}?</p>

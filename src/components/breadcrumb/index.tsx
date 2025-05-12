@@ -23,7 +23,7 @@ export const Breadcrumb = (props: BreadcrumbProps) => {
           );
         }
         if (paths?.length) {
-          return <Link to={`/${paths.join('/')}`}>{currentRoute.title}</Link>;
+          return <Link to={`/${paths.join('')}`}>{currentRoute.title}</Link>;
         }
         return <span>{currentRoute.title}</span>;
       }}

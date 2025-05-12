@@ -1,5 +1,5 @@
-import { RoleStatus, RoleTypes, UserStatus } from "@/constants/user.constants";
-import { IBaseParams, PageInfoResponseType } from ".";
+import { RoleStatus, RoleTypes, UserStatus } from '@/constants/user.constants';
+import { IBaseParams, PageInfoResponseType } from '.';
 
 export type UserType = {
   id: string;
@@ -7,6 +7,7 @@ export type UserType = {
   updatedAt: string;
   name: string;
   email: string;
+  kycLevel: number;
   status: UserStatus;
   createdBy?: string;
   phone?: string;
@@ -14,6 +15,11 @@ export type UserType = {
   avatar?: string;
   ipAddress?: string;
   lastLogin: string;
+  role: RoleType;
+};
+
+export type UserBodyType = {
+  status?: UserStatus;
 };
 
 export type PermissionType = {
@@ -33,8 +39,18 @@ export type RoleType = {
   permissions: PermissionType[];
 };
 
+export type UserStatisticType = {
+  userId: string;
+  point: number;
+  exp: number;
+  streak: number;
+  lives: number;
+};
+
 export type UserDetailType = UserType & {
   role: RoleType;
+  userStatistics?: UserStatisticType;
+  rank: string;
 };
 
 export type UserFilter = {
@@ -44,14 +60,7 @@ export type UserFilter = {
 export type UserListResponseType = PageInfoResponseType & {
   data: UserDetailType[];
 };
-export type UserParams = {
-    userId: string;
-    firstName: string;
-    middleName: string;
-    lastName: string;
-    email: string;
-    userName: string;
-    company: string;
-    subscription: string;
-    status: boolean;
-  }
+export type updateInfoParams = {
+  name: string;
+  phone: string;
+};

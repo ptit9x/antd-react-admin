@@ -4,7 +4,7 @@ import {
   IRefreshToken,
   IRegisterResponse,
   ISignUpRequest,
-  IChangePasswordRequest,
+  IChangePasswordRequest
 } from '@/types/auth.types';
 import { axiosClient, axiosPublicClient } from './request';
 
@@ -20,7 +20,7 @@ const authServices = {
   },
   changePassword(body: IChangePasswordRequest): Promise<void> {
     return axiosClient.post('v1/auth/change-password', body);
-  },
+  }
 };
 
 export default authServices;

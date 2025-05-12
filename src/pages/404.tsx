@@ -8,11 +8,11 @@ const NotFoundPage: React.FC = () => {
 
   return (
     <Result
-      status="404"
-      title="404"
+      status='404'
+      title='404'
       subTitle={t('page_not_found_title')}
       extra={
-        <Button type="primary" onClick={() => navigate('/')}>
+        <Button type='primary' onClick={() => navigate('/')}>
           {t('back_home')}
         </Button>
       }

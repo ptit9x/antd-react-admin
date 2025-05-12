@@ -11,7 +11,7 @@ export const AppContext = createContext<AppContextProps>({
   theme: 'light',
   collapsed: false,
   setTheme: () => {},
-  setCollapsed: () => {},
+  setCollapsed: () => {}
 });
 AppContext.displayName = 'ApplicationContext';
 

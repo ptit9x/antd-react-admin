@@ -1,6 +1,7 @@
+import { CustomAxiosError } from '@/types';
 import dayjs from 'dayjs';
 
-export const formatDateTime = (date: string | Date, format = 'DD/MM/YYYY hh:mm:ss'): string => {
+export const formatDateTime = (date: string | Date, format = 'DD/MM/YYYY HH:mm'): string => {
   return dayjs(date).format(format);
 };
 
@@ -18,4 +19,11 @@ export const debounce = <T extends Function>(cb: T, delay = 300) => {
       cb(...args);
     }, delay);
   };
+};
+
+export const getMessageError = (error: CustomAxiosError): string => {
+  if (error.response?.data?.message) {
+    return error.response?.data?.message;
+  }
+  return 'Something went wrong.';
 };

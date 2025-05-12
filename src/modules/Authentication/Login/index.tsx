@@ -17,8 +17,9 @@ export default function LoginModule() {
       style={{
         height: '100%',
         lineHeight: '50px',
-        padding: '2rem',
-      }}>
+        padding: '2rem'
+      }}
+    >
       <Title style={{ margin: 0 }}>{t('login')}</Title>
       <Flex gap={8}>
         <p>{t('do_not_have_an_account')}?</p>

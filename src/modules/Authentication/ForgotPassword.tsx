@@ -7,7 +7,7 @@ const { useBreakpoint } = Grid;
 
 export default function ForgotPasswordModule() {
   const { t } = useTranslation('auth');
-  const navegate = useNavigate();
+  const navigate = useNavigate();
   const screens = useBreakpoint();
   return (
     <Flex
@@ -17,13 +17,15 @@ export default function ForgotPasswordModule() {
       style={{
         height: '100%',
         lineHeight: '50px',
-        padding: '2rem',
-      }}>
+        padding: '2rem'
+      }}
+    >
       <h1
         style={{
           fontWeight: '500',
-          fontSize: '38px',
-        }}>
+          fontSize: '38px'
+        }}
+      >
         {t('forgot_password')}
       </h1>
       <p>{t('enter_your_email_to_reset_your_password')}</p>
@@ -35,13 +37,14 @@ export default function ForgotPasswordModule() {
           rules={[
             {
               required: true,
-              message: t('please_input_your_email'),
+              message: t('please_input_email')
             },
             {
               type: 'email',
-              message: t('please_input_a_valid_email'),
-            },
-          ]}>
+              message: t('please_input_a_valid_email')
+            }
+          ]}
+        >
           <Input />
         </Form.Item>
         <Form.Item>
@@ -52,8 +55,9 @@ export default function ForgotPasswordModule() {
             type='text'
             style={{ marginLeft: '20px' }}
             onClick={() => {
-              navegate(-1);
-            }}>
+              navigate(-1);
+            }}
+          >
             Cancel
           </Button>
         </Form.Item>

@@ -6,7 +6,7 @@ interface DataType {
   key: React.Key;
   name: string;
   age: number;
-  piority: string[];
+  priority: string[];
   status: string[];
   address: string;
 }
@@ -19,11 +19,11 @@ const columns: TableColumnsType<DataType> = [
     filters: [
       {
         text: 'Joe',
-        value: 'Joe',
+        value: 'Joe'
       },
       {
         text: 'Jim',
-        value: 'Jim',
+        value: 'Jim'
       },
       {
         text: 'Submenu',
@@ -31,31 +31,31 @@ const columns: TableColumnsType<DataType> = [
         children: [
           {
             text: 'Green',
-            value: 'Green',
+            value: 'Green'
           },
           {
             text: 'Black',
-            value: 'Black',
-          },
-        ],
-      },
+            value: 'Black'
+          }
+        ]
+      }
     ],
     // specify the condition of filtering result
     // here is that finding the name started with `value`
     onFilter: (value, record) => record.name.indexOf(value as string) === 0,
     sorter: (a, b) => a.name.length - b.name.length,
-    sortDirections: ['descend'],
+    sortDirections: ['descend']
   },
   {
     title: 'Age',
     dataIndex: 'age',
     defaultSortOrder: 'descend',
-    sorter: (a, b) => a.age - b.age,
+    sorter: (a, b) => a.age - b.age
   },
   {
     title: 'Piority',
     dataIndex: 'piority',
-    render: (_, { piority }) => (
+    render: (_, { priority: piority }) => (
       <>
         {piority.map((piority) => {
           let color = piority.length > 5 ? 'geekblue' : 'cyan';
@@ -69,7 +69,7 @@ const columns: TableColumnsType<DataType> = [
           );
         })}
       </>
-    ),
+    )
   },
   {
     title: 'Status',
@@ -77,13 +77,8 @@ const columns: TableColumnsType<DataType> = [
     render: (_, { status }) => (
       <>
         {status.map((status) => {
-          let color:
-            | 'success'
-            | 'processing'
-            | 'error'
-            | 'default'
-            | 'warning'
-            | undefined = status.length > 9 ? 'processing' : 'success';
+          let color: 'success' | 'processing' | 'error' | 'default' | 'warning' | undefined =
+            status.length > 9 ? 'processing' : 'success';
           if (status === 'On hold') {
             color = 'default';
           }
@@ -96,7 +91,7 @@ const columns: TableColumnsType<DataType> = [
           return <Badge status={color} text={text} key={status}></Badge>;
         })}
       </>
-    ),
+    )
   },
   {
     title: 'Address',
@@ -104,15 +99,15 @@ const columns: TableColumnsType<DataType> = [
     filters: [
       {
         text: 'London',
-        value: 'London',
+        value: 'London'
       },
       {
         text: 'New York',
-        value: 'New York',
-      },
+        value: 'New York'
+      }
     ],
-    onFilter: (value, record) => record.address.indexOf(value as string) === 0,
-  },
+    onFilter: (value, record) => record.address.indexOf(value as string) === 0
+  }
 ];
 
 const data = [
@@ -120,42 +115,37 @@ const data = [
     key: '1',
     name: 'John Brown',
     age: 32,
-    piority: ['medium'],
+    priority: ['medium'],
     status: ['Completed'],
-    address: 'New York No. 1 Lake Park',
+    address: 'New York No. 1 Lake Park'
   },
   {
     key: '2',
     name: 'Jim Green',
     age: 42,
-    piority: ['hight'],
+    priority: ['hight'],
     status: ['On hold'],
-    address: 'London No. 1 Lake Park',
+    address: 'London No. 1 Lake Park'
   },
   {
     key: '3',
     name: 'Joe Black',
     age: 32,
-    piority: ['low'],
+    priority: ['low'],
     status: ['In progress'],
-    address: 'Sydney No. 1 Lake Park',
+    address: 'Sydney No. 1 Lake Park'
   },
   {
     key: '4',
     name: 'Jim Red',
     age: 32,
-    piority: ['medium'],
+    priority: ['medium'],
     status: ['In progress'],
-    address: 'London No. 2 Lake Park',
-  },
+    address: 'London No. 2 Lake Park'
+  }
 ];
 
-const onChange: TableProps<DataType>['onChange'] = (
-  pagination,
-  filters,
-  sorter,
-  extra
-) => {
+const onChange: TableProps<DataType>['onChange'] = (pagination, filters, sorter, extra) => {
   console.log('params', pagination, filters, sorter, extra);
 };
 

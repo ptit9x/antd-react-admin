@@ -1,9 +1,14 @@
-import { FileProtectOutlined, FileSyncOutlined, SafetyCertificateOutlined, UsergroupAddOutlined } from '@ant-design/icons';
+import {
+  FileProtectOutlined,
+  FileSyncOutlined,
+  SafetyCertificateOutlined,
+  UsergroupAddOutlined
+} from '@ant-design/icons';
 import { Row, Col, Progress, Flex, Typography, Card } from 'antd';
 import { useTranslation } from 'react-i18next';
 const { Text, Title } = Typography;
 const ProgressModule = () => {
-const {t} = useTranslation('common');
+  const { t } = useTranslation('common');
   return (
     <Row gutter={[32, 32]} style={{ marginTop: 12 }}>
       <Col xs={24} lg={6}>

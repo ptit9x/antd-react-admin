@@ -1,4 +1,4 @@
-import RegisterModule from "@/modules/Authentication/Register";
+import RegisterModule from '@/modules/Authentication/Register';
 
 const RegisterPage = () => {
   return <RegisterModule />;

@@ -1,7 +1,7 @@
-import LoginModule from "@/modules/Authentication/Login";
+import LoginModule from '@/modules/Authentication/Login';
 
 const LoginPage = () => {
-  return <LoginModule/>;
+  return <LoginModule />;
 };
 
 export default LoginPage;

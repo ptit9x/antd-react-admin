@@ -1,4 +1,3 @@
-
 import { LocalStorageKey } from '@/constants/local-storage.constants';
 import { parseJSON } from './json.utils';
 
@@ -19,7 +18,7 @@ const setItemLocalStorageWithExpiry = <T>(key: LocalStorageKey, value: T, ttl: n
   const now = new Date();
   const item = {
     value,
-    expiry: now.getTime() + ttl,
+    expiry: now.getTime() + ttl
   };
   localStorage.setItem(key, JSON.stringify(item));
 };
@@ -55,5 +54,5 @@ export {
   setItemLocalStorageWithExpiry,
   getItemLocalStorageWithExpiry,
   removeItemLocalStorage,
-  clearLocalStorage,
+  clearLocalStorage
 };

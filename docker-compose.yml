@@ -1,0 +1,17 @@
+version: '3.3'
+
+services:
+  learn_to_earn_admin:
+    container_name: learn_to_earn_admin
+    restart: always
+    image: 'huynhdn/learn_to_earn_admin:1.0'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:80
+    networks:
+      - common
+networks:
+  common:
+    driver: bridge

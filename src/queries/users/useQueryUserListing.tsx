@@ -14,7 +14,7 @@ export default function useQueryUserListing() {
       filterSearch?.page,
       filterSearch?.pageSize,
       filterSearch?.sortOrder,
-      filterSearch?.sortBy,
+      filterSearch?.sortBy
     ],
     queryFn: () => userServices.getListPagination(filterSearch),
     placeholderData: keepPreviousData,

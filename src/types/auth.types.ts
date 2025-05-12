@@ -1,4 +1,4 @@
-import { RoleType } from "./user.types";
+import { RoleType } from './user.types';
 
 export interface ILoginAndRefreshResponse {
   accessToken: string;
@@ -38,24 +38,23 @@ export interface IToken {
   role: RoleType;
 }
 
-
 export type RegisterParams = {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
   confirmPassword: string;
-}
+};
 
 export type ResetPasswordParams = {
   email: string;
-}
+};
 
 export type ChangePasswordParams = {
-  currentPassword: string;
+  oldPassword: string;
   newPassword: string;
   confirmPassword: string;
-}
+};
 
 export interface IChangePasswordRequest {
   oldPassword: string;

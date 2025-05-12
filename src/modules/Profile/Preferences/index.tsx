@@ -29,27 +29,21 @@ export default function PreferencesModule() {
               <Flex justify='space-between' align='center'>
                 <Flex gap={4} vertical>
                   <Text>General newsletter</Text>
-                  <Text type='secondary'>
-                    News, announcements & product updates
-                  </Text>
+                  <Text type='secondary'>News, announcements & product updates</Text>
                 </Flex>
                 <Switch defaultChecked />
               </Flex>
               <Flex justify='space-between' align='center'>
                 <Flex gap={4} vertical>
                   <Text>General newsletter</Text>
-                  <Text type='secondary'>
-                    News, announcements & product updates
-                  </Text>
+                  <Text type='secondary'>News, announcements & product updates</Text>
                 </Flex>
                 <Switch defaultChecked />
               </Flex>
               <Flex justify='space-between' align='center'>
                 <Flex gap={4} vertical>
                   <Text>General newsletter</Text>
-                  <Text type='secondary'>
-                    News, announcements & product updates
-                  </Text>
+                  <Text type='secondary'>News, announcements & product updates</Text>
                 </Flex>
                 <Switch defaultChecked />
               </Flex>

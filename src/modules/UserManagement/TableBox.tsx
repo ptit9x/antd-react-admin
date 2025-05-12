@@ -1,25 +1,18 @@
 import Highlighter from 'react-highlight-words';
 import { UserDetailType } from '@/types';
-import { Avatar, Tag } from 'antd';
-import {
-  Button,
-  Input,
-  InputRef,
-  Space,
-  Table,
-  TableColumnType,
-  TableProps,
-  theme
-} from 'antd';
+import { Avatar, message, Switch } from 'antd';
+import { Button, Input, InputRef, Space, Table, TableColumnType, TableProps, theme, Popconfirm } from 'antd';
 import { useRef, useState } from 'react';
 import { FilterDropdownProps } from 'antd/es/table/interface';
 import useQueryUserListing from '@/queries/users/useQueryUserListing';
 import { useUserStore } from '@/stores/user.store';
-import { UserLabel, UserStatus } from '@/constants/user.constants';
-import { NavLink } from 'react-router-dom';
-import { PATH_USER_DETAIL } from '@/routes/routes.path';
+import { UserStatus } from '@/constants/user.constants';
+import userServices from '@/services/user.services';
 import { useTranslation } from 'react-i18next';
-import { UserOutlined } from '@ant-design/icons';
+import { EyeOutlined, UserOutlined } from '@ant-design/icons';
+import { PATH_USER_DETAIL } from '@/routes/routes.path';
+import { NavLink } from 'react-router-dom';
+import { formatDateTime } from '@/utils';
 
 const { useToken } = theme;
 
@@ -30,22 +23,41 @@ export default function TableBox() {
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef<InputRef>(null);
   const { t } = useTranslation();
-  const { filterSearch, setFilterSearch } = useUserStore();
-  const { status, data } = useQueryUserListing();
+  const { filterSearch, setFilterSearch, profile } = useUserStore();
+  const { status, data, refetch } = useQueryUserListing();
   const { token } = useToken();
 
   const handleSearch = (selectedKeys: string[], confirm: FilterDropdownProps['confirm'], dataIndex: DataIndex) => {
     confirm();
     setSearchText(selectedKeys[0]);
     setSearchedColumn(dataIndex);
-    setFilterSearch({ ...filterSearch, page: 1, [dataIndex === 'name' ? 'search' : dataIndex]: selectedKeys[0] });
+    setFilterSearch({
+      ...filterSearch,
+      page: 1,
+      [dataIndex === 'name' ? 'search' : dataIndex]: selectedKeys[0]
+    });
   };
 
   const handleReset = (clearFilters: () => void, confirm: FilterDropdownProps['confirm'], dataIndex: DataIndex) => {
     clearFilters();
     confirm();
     setSearchText('');
-    setFilterSearch({ ...filterSearch, [dataIndex === 'name' ? 'search' : dataIndex]: '' });
+    setFilterSearch({
+      ...filterSearch,
+      [dataIndex === 'name' ? 'search' : dataIndex]: ''
+    });
+  };
+
+  const handleEditStatus = async (record: UserDetailType) => {
+    await userServices
+      .updateUser(record.id, {
+        status: record.status === UserStatus.ACTIVE ? UserStatus.INACTIVE : UserStatus.ACTIVE
+      })
+      .then(() => {
+        message.success(t('common:update_success'));
+        refetch();
+      })
+      .catch((err) => message.error(err));
   };
 
   const getColumnSearchProps = (dataIndex: DataIndex, placeholder: string): TableColumnType<UserDetailType> => ({
@@ -94,9 +106,13 @@ export default function TableBox() {
       }
     },
     render: (text) =>
-      (searchedColumn === dataIndex) ? (
+      searchedColumn === dataIndex ? (
         <Highlighter
-          highlightStyle={{ backgroundColor: token.colorPrimary, color: 'white', padding: 0 }}
+          highlightStyle={{
+            backgroundColor: token.colorPrimary,
+            color: 'white',
+            padding: 0
+          }}
           searchWords={[searchText]}
           autoEscape
           textToHighlight={text ? text.toString() : ''}
@@ -129,25 +145,29 @@ export default function TableBox() {
       title: 'Email',
       dataIndex: 'email',
       key: 'email',
-      ellipsis: true,
+      ellipsis: true
     },
     {
       title: t('user:avatar'),
       dataIndex: 'avatar',
       key: 'avatar',
       render: (_, record) => (
-        <Avatar shape="square" size="large" icon={record?.avatar ? <img src={record.avatar} alt="" /> : <UserOutlined />} />
+        <Avatar
+          shape='square'
+          size='large'
+          icon={record?.avatar ? <img src={record.avatar} alt='' /> : <UserOutlined />}
+        />
       )
     },
     {
       title: t('user:phone'),
       dataIndex: 'phone',
-      key: 'phone',
+      key: 'phone'
     },
     {
       title: t('user:role'),
-      dataIndex: 'role',
-      key: 'role',
+      dataIndex: 'roleId',
+      key: 'roleId',
       render: (_, record) => record?.role?.name
     },
     {
@@ -155,24 +175,41 @@ export default function TableBox() {
       dataIndex: 'status',
       key: 'status',
       align: 'center',
-      filters: [{
-        text: 'Active',
-        value: UserStatus.ACTIVE
-      }, {
-        text: 'InActive',
-        value: UserStatus.INACTIVE
-      }],
+      filters: [
+        {
+          text: 'Active',
+          value: UserStatus.ACTIVE
+        },
+        {
+          text: 'InActive',
+          value: UserStatus.INACTIVE
+        }
+      ],
       filterMultiple: false,
-      render: (_, record) => (
-        <Tag color={record.status === UserStatus.ACTIVE ? 'success' : 'error'}>{UserLabel[record.status]}</Tag>
-      )
+      render: (_, record) =>
+        record.email !== profile?.email ? (
+          <Popconfirm title={t('user:confirm_action')} onConfirm={() => handleEditStatus(record)}>
+            <Switch defaultChecked value={record.status === UserStatus.ACTIVE} />
+          </Popconfirm>
+        ) : (
+          <Switch defaultChecked value={record.status === UserStatus.ACTIVE} />
+        )
     },
-
+    {
+      title: t('user:created_at'),
+      dataIndex: 'createdAt',
+      key: 'createdAt',
+      render: (createdAt: string) => formatDateTime(createdAt)
+    },
     {
       title: t('common:action'),
       key: 'action',
       render: (_, record) => (
-        <NavLink to={PATH_USER_DETAIL.replace(':id', record?.id)}>{t('common:view')}</NavLink>
+        <>
+          <NavLink to={PATH_USER_DETAIL.replace(':id', record.id || '')}>
+            <Button type='text' icon={<EyeOutlined />} />
+          </NavLink>
+        </>
       )
     }
   ];
@@ -182,29 +219,31 @@ export default function TableBox() {
       ...filterSearch,
       status: (filters?.status?.length === 1 ? filters?.status?.[0] : '') as UserStatus,
       page: pagination.current,
-      pageSize: pagination.pageSize,
+      pageSize: pagination.pageSize
     });
   };
 
   return (
-    <Table
-      loading={status === 'pending'}
-      size='large'
-      rowKey='id'
-      columns={columns}
-      dataSource={data?.data || []}
-      locale={{
-        filterReset: t('common:reset'),
-        emptyText: t('common:no_data'),
-      }}
-      pagination={{
-        total: data?.totalItem || 0,
-        pageSize: filterSearch?.pageSize || 10,
-        pageSizeOptions: [10, 20, 50, 100],
-        showTotal: (total) => t('common:total_n_items', { n: total }),
-      }}
-      scroll={{ x: 700 }}
-      onChange={handleChangeTable}
-    />
+    <>
+      <Table
+        loading={status === 'pending'}
+        size='large'
+        rowKey='id'
+        columns={columns}
+        dataSource={data?.data || []}
+        locale={{
+          filterReset: t('common:reset'),
+          emptyText: t('common:no_data')
+        }}
+        pagination={{
+          total: data?.totalItem || 0,
+          pageSize: filterSearch?.pageSize || 10,
+          pageSizeOptions: [10, 20, 50, 100],
+          showTotal: (total) => t('common:total_n_items', { n: total })
+        }}
+        scroll={{ x: 700 }}
+        onChange={handleChangeTable}
+      />
+    </>
   );
 }

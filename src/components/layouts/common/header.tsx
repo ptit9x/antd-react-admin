@@ -1,23 +1,10 @@
 import type { FC } from 'react';
 
-import {
-  LogoutOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
-import {
-  Dropdown,
-  Layout,
-  theme as antTheme,
-  Tooltip,
-  Button,
-  Flex,
-} from 'antd';
+import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from '@ant-design/icons';
+import { Dropdown, Layout, theme as antTheme, Tooltip, Button, Flex, Avatar } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 
-import Avator from '@/assets/header/avator.jpeg';
-import ReactSvg from '@/assets/logo/react.svg';
+import ReactSvg from '@/assets/logo/antd.svg';
 import { useAppContext } from '@/hooks/useAppContext';
 import { useMediaQuery } from '@uidotdev/usehooks';
 import { MoonIcon } from '../../icons/MoonIcon';
@@ -26,6 +13,7 @@ import LanguageDropdown from './LanguageDropdown';
 import { useTranslation } from 'react-i18next';
 import { LocalStorageKey } from '@/constants/local-storage.constants';
 import { PATH_LOGIN, PATH_PROFILE_DETAIL } from '@/routes/routes.path';
+import { useUserStore } from '@/stores/user.store';
 
 const { Header } = Layout;
 
@@ -43,6 +31,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
   const isMobile = useMediaQuery('only screen and (max-width : 768px)');
   const token = antTheme.useToken();
   const logged = true;
+  const { profile } = useUserStore();
 
   const onActionClick = async (action: Action) => {
     switch (action) {
@@ -81,19 +70,12 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
         alignItems: 'center',
         zIndex: 9,
         boxShadow: `0 4px 10px ${token.token.colorBgTextHover}`,
-        backgroundColor: token.token.colorBgContainer,
-      }}>
+        backgroundColor: token.token.colorBgContainer
+      }}
+    >
       {!isMobile && (
-        <Flex
-          align='center'
-          justify='center'
-          gap={10}
-          style={{ width: collapsed ? 80 : 200 }}>
-          <img
-            src={ReactSvg}
-            alt=''
-            style={{ marginRight: collapsed ? '2px' : '20px' }}
-          />
+        <Flex align='center' justify='center' gap={10} style={{ width: collapsed ? 80 : 200 }}>
+          <img src={ReactSvg} alt='' width={collapsed ? 40 : 50} style={{ marginRight: collapsed ? '2px' : '20px' }} />
         </Flex>
       )}
       <Flex
@@ -101,8 +83,9 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
         justify='space-between'
         flex={1}
         style={{
-          padding: '0 15px',
-        }}>
+          padding: '0 15px'
+        }}
+      >
         <Button
           id='sidebar-trigger'
           type='text'
@@ -110,12 +93,7 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
           onClick={toggle}
         />
         <Flex gap={10} align='center'>
-          <Tooltip
-            title={
-              theme === 'dark'
-                ? t('switch_to_light_theme')
-                : t('switch_to_dark_theme')
-            }>
+          <Tooltip title={theme === 'dark' ? t('switch_to_light_theme') : t('switch_to_dark_theme')}>
             <Button
               id='theme-change'
               type='text'
@@ -133,20 +111,29 @@ const HeaderComponent: FC<HeaderProps> = ({ collapsed, toggle }) => {
                   {
                     key: '1',
                     icon: <UserOutlined />,
-                    label: <Link to={PATH_PROFILE_DETAIL}>{t('account')}</Link>,
+                    label: <Link to={PATH_PROFILE_DETAIL}>{t('account')}</Link>
                   },
                   {
                     key: '2',
                     icon: <LogoutOutlined />,
-                    label: (
-                      <span onClick={() => onActionClick('logout')}>
-                        {t('logout')}
-                      </span>
-                    ),
-                  },
-                ],
-              }}>
-              <img src={Avator} alt='avatar' width={40} height={40} />
+                    label: <span onClick={() => onActionClick('logout')}>{t('logout')}</span>
+                  }
+                ]
+              }}
+            >
+              {profile?.avatar ? (
+                <img
+                  src={profile.avatar}
+                  alt='avatar'
+                  width={40}
+                  height={40}
+                  style={{
+                    borderRadius: '5%'
+                  }}
+                />
+              ) : (
+                <Avatar shape='square'>{profile?.name?.substring(0, 1)?.toLocaleUpperCase() || 'E'}</Avatar>
+              )}
             </Dropdown>
           ) : (
             <span style={{ cursor: 'pointer' }} onClick={toLogin}>

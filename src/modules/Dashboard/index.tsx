@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import Overview from './overview';
 import { Col, Row, Space } from 'antd';
-import TimeLine from './timeLine';
 import { Breadcrumb } from '@/components/breadcrumb';
 import Progress from './progress';
 import { useTranslation } from 'react-i18next';
@@ -25,11 +24,11 @@ const DashBoardModule: FC = () => {
   const BreadcrumbItems = [
     {
       path: '/',
-      title: t('home'),
+      title: t('home')
     },
     {
-      title: t('dashboard'),
-    },
+      title: t('dashboard')
+    }
   ];
 
   return (
@@ -42,7 +41,7 @@ const DashBoardModule: FC = () => {
       <Col span={24}>
         <Overview loading={loading} />
         <Progress />
-        <TimeLine loading={loading} />
+        {/* <TimeLine loading={loading} /> */}
       </Col>
     </Row>
   );

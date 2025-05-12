@@ -8,9 +8,10 @@ import authEn from '@/locales/en/auth.json';
 import authVi from '@/locales/vi/auth.json';
 import userEn from '@/locales/en/user.json';
 import userVi from '@/locales/vi/user.json';
-
-import profileVi from '@/locales/vi/profile.json';
-import profileEn from '@/locales/en/profile.json';
+import libraryEn from '@/locales/en/library.json';
+import libraryVi from '@/locales/vi/library.json';
+import backendEn from '@/locales/en/backend.json';
+import backendVi from '@/locales/vi/backend.json';
 
 import { LocalStorageKey } from './constants/local-storage.constants';
 
@@ -22,19 +23,22 @@ const resources = {
     common: commonEn,
     auth: authEn,
     user: userEn,
-    profile: profileEn,
+    library: libraryEn,
+    backend: backendEn
   },
   vi: {
     common: commonVi,
     auth: authVi,
     user: userVi,
-    profile: profileVi,
-}} as const;
+    library: libraryVi,
+    backend: backendVi
+  }
+} as const;
 
 i18n.use(initReactI18next).use(LanguageDetector).init({
   lng: language,
   fallbackLng: 'en',
-  resources,
+  resources
 });
 
 export const getLanguage = () => i18n.language || language;

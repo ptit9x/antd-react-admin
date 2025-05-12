@@ -24,7 +24,7 @@ export interface IBaseParams {
   page?: number;
   pageSize?: number;
   sortBy?: string;
-  sortOrder?: 'ASC' | 'DESC';
+  sortOrder?: 'asc' | 'desc';
   search?: string;
 }
 

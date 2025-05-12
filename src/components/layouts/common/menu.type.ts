@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 type MenuItem = {
   /** menu item code */
@@ -8,7 +8,7 @@ type MenuItem = {
   path: string;
   children?: MenuItem[];
   scope?: string;
-}
+};
 
 export type MenuChild = Omit<MenuItem, 'children'>;
 
